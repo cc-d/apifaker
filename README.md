@@ -1,2 +1,2 @@
-# apimock
-automatically creates mocked version of an api from openapi.json specification for use in python tests
+# apifaker
+like an api but fake-er
