@@ -1,0 +1,39 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "apifaker"
+version = "0.0.1"
+description = "Automatically creates mocked versions of an API from openapi.json specification for use in Python tests."
+authors = [
+    { name = "Cary Carter", email = "ccarterdev@gmail.com" }
+]
+readme = "README.md"
+keywords = ["api", "mock", "testing", "openapi", "fastapi"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Testing",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9"
+]
+dependencies = [
+    "pyshared>=1.5.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "setuptools>=42",
+    "wheel",
+    "fastapi",
+    "pydantic",
+    "httpx"
+]
+
+[project.urls]
+repository = 'https://github.com/cc-d/apifaker'
