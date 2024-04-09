@@ -144,4 +144,4 @@ async def openapi():
 
 client = TestClient(app)
 
-print(client.get("/people").json())
+print(client.get("/people").json(), data, sep="\n")
