@@ -43,7 +43,7 @@ class Country(IDBase):
     capital: City
 
 
-unique_ids = [x for x in range(1, 10000000)]
+unique_ids = [x for x in range(1, 1000)]
 
 
 def _get_id():
