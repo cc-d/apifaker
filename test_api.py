@@ -46,6 +46,10 @@ class Country(IDBase):
 unique_ids = [x for x in range(1, 10000000)]
 
 
+def _get_id():
+    return unique_ids.pop(ran.randint(0, len(unique_ids) - 1))
+
+
 class Data:
     FIRST_NAMES = ["Alice", "Bob", "Charlie", "David", "Eva"]
     LAST_NAMES = ["Smith", "Johnson", "Williams", "Jones", "Brown"]
@@ -71,7 +75,7 @@ class Data:
             Person(
                 name=f"{ran.choice(self.FIRST_NAMES)} {ran.choice(self.LAST_NAMES)}",
                 age=ran.randint(18, 99),
-                id=ran.choice(unique_ids),
+                id=_get_id(),
             )
             for _ in range(100)
         ]
@@ -79,7 +83,7 @@ class Data:
             Building(
                 address=f"{ran.randint(1, 999)} {ran.choice(self.STREET_NAMES)} {ran.choice(self.STREET_TYPES)}",
                 owner=ran.choice(self.people),
-                id=ran.choice(unique_ids),
+                id=_get_id(),
             )
             for _ in range(20)
         ]
@@ -88,7 +92,7 @@ class Data:
                 name=f"{ran.choice(self.CITY_PARTS)}{ran.choice(self.CITY_SUFFIXES)}",
                 buildings=[ran.choice(self.buildings) for _ in range(5)],
                 governor=ran.choice(self.people),
-                id=ran.choice(unique_ids),
+                id=_get_id(),
             )
             for _ in range(10)
         ]
@@ -96,7 +100,7 @@ class Data:
             Region(
                 name=f"{ran.choice(self.CITY_PARTS)} County",
                 cities=[ran.choice(self.cities) for _ in range(5)],
-                id=ran.choice(unique_ids),
+                id=_get_id(),
             )
             for _ in range(5)
         ]
@@ -106,7 +110,7 @@ class Data:
                 regions=[ran.choice(self.regions) for _ in range(5)],
                 president=ran.choice(self.people),
                 capital=ran.choice(self.cities),
-                id=ran.choice(unique_ids),
+                id=_get_id(),
             )
             for _ in range(2)
         ]
