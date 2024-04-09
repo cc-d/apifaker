@@ -25,25 +25,44 @@ class House(Building):
     occupants: List[Person]
 
 
-unique_ids = [x for x in range(1, 1000)]
+class Data:
+    people: List[Person] = []
+    houses: List[House] = []
+    homeless: List[Person] = []
+    housed: List[Person] = []
 
+    def __init__(self):
+        for i in range(100):
+            self.people.append(
+                Person(id=i, name=f'Person {i}', age=ran.randint(1, 100))
+            )
+        pool = self.people.copy()
+        for i in range(10):
+            occupants = [
+                pool.pop(ran.randint(0, len(pool) - 1))
+                for _ in range(ran.randint(1, 7))
+            ]
+            self.houses.append(
+                House(
+                    id=i,
+                    address=f'Address {i}',
+                    owner=pool.pop(ran.randint(0, len(pool) - 1)),
+                    occupants=occupants,
+                )
+            )
+        self.homeless = pool
+        self.housed = [p for h in self.houses for p in h.occupants]
 
-data = {
-    "people": {x: Person(id=x, name=ran(), age=ran()) for x in unique_ids},
-    "buildings": {
-        x: Building(id=x, address=ran(), owner=data["people"][ran()])
-        for x in unique_ids
-    },
-    "houses": {
-        x: House(
-            id=x,
-            address=ran(),
-            owner=data["people"][ran()],
-            occupants=[data["people"][ran()] for _ in range(1, 5)],
+    def __repr__(self):
+        return "Data(people={}, houses={}, homeless={}, housed={})".format(
+            len(self.people),
+            len(self.houses),
+            len(self.homeless),
+            len(self.housed),
         )
-        for x in unique_ids
-    },
-}
+
+
+data = Data()
 
 
 @app.get("/openapi.json")
@@ -52,10 +71,10 @@ async def openapi():
 
 
 @app.get("/people")
-async def people():
-    return data["people"]
+async def get_people():
+    return data.people
 
 
 client = TestClient(app)
 
-print(client.get("/people").json(), data, sep="\n")
+print(str(client.get("/people").json())[0:100], data, sep="\n")
