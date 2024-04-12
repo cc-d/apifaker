@@ -65,7 +65,8 @@ async def get_groups():
     return groups
 
 
-client = TestClient(app)
+from apifake.main import ApiFake
 
-# print(str(client.get("/openapi.json").json())[0:1000])
-print(str(client.get("/items").json())[0:1000])
+apifake = ApiFake(app.openapi())
+print(apifake.routes)
+apifake.start()
