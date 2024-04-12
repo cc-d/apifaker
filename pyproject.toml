@@ -23,7 +23,7 @@ classifiers = [
     "Programming Language :: Python :: 3.9"
 ]
 dependencies = [
-    "pyshared>=1.5.3",
+    "pyshared>=1.5.4",
 ]
 
 [project.optional-dependencies]
